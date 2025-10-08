@@ -1,10 +1,19 @@
+"use client";
+
 import Image from "next/image";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function Page() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
   return (
-    <div className="flex min-h-screen bg-gray-100 text-gray-900">
+    <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
       {/* Sidebar izquierda */}
-      <aside className="w-64 bg-white shadow-lg flex flex-col justify-between p-6">
+      <aside className="w-64 bg-white dark:bg-gray-800 shadow-lg flex flex-col justify-between p-6 transition-colors duration-300">
         <div>
           <h1 className="text-2xl font-bold text-red-600 mb-10">Netflix.</h1>
 
@@ -15,32 +24,44 @@ export default function Page() {
                 <li className="text-red-600 font-semibold flex items-center gap-3">
                   <span className="w-2 h-2 bg-red-600 rounded-full"></span> Browse
                 </li>
-                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Watchlist</li>
-                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Coming soon</li>
+                <li className="text-gray-600 dark:text-gray-300 hover:text-red-500 cursor-pointer">
+                  Watchlist
+                </li>
+                <li className="text-gray-600 dark:text-gray-300 hover:text-red-500 cursor-pointer">
+                  Coming soon
+                </li>
               </ul>
             </div>
 
             <div>
               <h2 className="text-gray-400 text-sm uppercase mb-2">Social</h2>
               <ul className="space-y-3">
-                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Friends</li>
-                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Parties</li>
+                <li className="text-gray-600 dark:text-gray-300 hover:text-red-500 cursor-pointer">
+                  Friends
+                </li>
+                <li className="text-gray-600 dark:text-gray-300 hover:text-red-500 cursor-pointer">
+                  Parties
+                </li>
               </ul>
             </div>
 
             <div>
               <h2 className="text-gray-400 text-sm uppercase mb-2">General</h2>
               <ul className="space-y-3">
-                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Settings</li>
-                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Log out</li>
+                <li className="text-gray-600 dark:text-gray-300 hover:text-red-500 cursor-pointer">
+                  Settings
+                </li>
+                <li className="text-gray-600 dark:text-gray-300 hover:text-red-500 cursor-pointer">
+                  Log out
+                </li>
               </ul>
             </div>
           </nav>
         </div>
 
-        <div className="mt-10 bg-gray-50 p-4 rounded-xl text-center">
+        <div className="mt-10 bg-gray-50 dark:bg-gray-700 p-4 rounded-xl text-center transition-colors duration-300">
           <h3 className="font-semibold text-sm">🍿 Popcorn Addict</h3>
-          <p className="text-xs text-gray-500 mb-2">4/6h viewing time</p>
+          <p className="text-xs text-gray-500 dark:text-gray-300 mb-2">4/6h viewing time</p>
           <button className="bg-red-500 text-white rounded-lg px-3 py-1 text-xs hover:bg-red-600">
             View challenges
           </button>
@@ -54,15 +75,21 @@ export default function Page() {
           <input
             type="text"
             placeholder="Search..."
-            className="w-1/3 bg-white rounded-lg px-4 py-2 shadow-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-1/3 bg-white dark:bg-gray-800 rounded-lg px-4 py-2 shadow-sm border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors duration-300"
           />
           <div className="flex items-center gap-4">
-            <button className="relative text-xl">
-              🔔
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-full">
-                3
-              </span>
-            </button>
+            {/* Botones de tema */}
+            <select
+              value={theme}
+              onChange={(e) => setTheme(e.target.value)}
+              className="bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md px-2 py-1 text-sm"
+            >
+              <option value="light">Claro</option>
+              <option value="dark">Oscuro</option>
+              <option value="system">Sistema</option>
+            </select>
+
+            <button className="relative text-xl">🔔</button>
             <button className="text-xl">💬</button>
             <div className="flex items-center gap-2">
               <Image
@@ -70,17 +97,17 @@ export default function Page() {
                 alt="user"
                 width={40}
                 height={40}
-                className="rounded-full border"
+                className="rounded-full border border-gray-300 dark:border-gray-600"
               />
               <div>
                 <p className="font-semibold">Ramona F.</p>
-                <p className="text-xs text-gray-500">Level 12</p>
+                <p className="text-xs text-gray-500 dark:text-gray-300">Level 12</p>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Hero section */}
+        {/* Hero */}
         <section className="relative rounded-2xl overflow-hidden shadow-lg mb-10">
           <Image
             src="/images/witcher.jpg"
@@ -115,7 +142,7 @@ export default function Page() {
             ].map((party, i) => (
               <div
                 key={i}
-                className="min-w-[180px] bg-white p-4 rounded-xl shadow hover:shadow-md cursor-pointer transition"
+                className="min-w-[180px] bg-white dark:bg-gray-800 p-4 rounded-xl shadow hover:shadow-md cursor-pointer transition"
               >
                 <Image
                   src={party.img}
@@ -125,7 +152,7 @@ export default function Page() {
                   className="h-24 w-full object-cover rounded-lg mb-3"
                 />
                 <h4 className="font-semibold">{party.title}</h4>
-                <p className="text-xs text-gray-500">{party.subtitle}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-300">{party.subtitle}</p>
               </div>
             ))}
           </div>
@@ -143,7 +170,7 @@ export default function Page() {
             ].map((show, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow hover:shadow-lg transition"
               >
                 <Image
                   src={show.img}
@@ -161,10 +188,9 @@ export default function Page() {
         </section>
       </main>
 
-      {/* Sidebar derecha - Amigos */}
-      <aside className="w-64 bg-white shadow-lg p-6 hidden lg:flex flex-col">
+      {/* Sidebar derecha */}
+      <aside className="w-64 bg-white dark:bg-gray-800 shadow-lg p-6 hidden lg:flex flex-col transition-colors duration-300">
         <h2 className="text-gray-400 text-sm uppercase mb-4">Amigos</h2>
-
         <div className="flex flex-col gap-4 overflow-y-auto">
           {[
             { name: "Juan Pérez", img: "/images/amigos/amigo1.jpg" },
@@ -173,16 +199,13 @@ export default function Page() {
             { name: "Lucía Gómez", img: "/images/amigos/amigo4.jpg" },
             { name: "Andrés Díaz", img: "/images/amigos/amigo5.jpg" },
           ].map((friend, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg cursor-pointer"
-            >
+            <div key={i} className="flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded-lg cursor-pointer">
               <Image
                 src={friend.img}
                 alt={friend.name}
                 width={40}
                 height={40}
-                className="rounded-full border border-gray-200"
+                className="rounded-full border border-gray-300 dark:border-gray-600"
               />
               <div className="flex flex-col">
                 <span className="font-medium text-sm">{friend.name}</span>
