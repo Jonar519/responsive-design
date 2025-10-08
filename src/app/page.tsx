@@ -1,103 +1,199 @@
 import Image from "next/image";
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="flex min-h-screen bg-gray-100 text-gray-900">
+      {/* Sidebar izquierda */}
+      <aside className="w-64 bg-white shadow-lg flex flex-col justify-between p-6">
+        <div>
+          <h1 className="text-2xl font-bold text-red-600 mb-10">Netflix.</h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <nav className="space-y-6">
+            <div>
+              <h2 className="text-gray-400 text-sm uppercase mb-2">Menu</h2>
+              <ul className="space-y-3">
+                <li className="text-red-600 font-semibold flex items-center gap-3">
+                  <span className="w-2 h-2 bg-red-600 rounded-full"></span> Browse
+                </li>
+                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Watchlist</li>
+                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Coming soon</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="text-gray-400 text-sm uppercase mb-2">Social</h2>
+              <ul className="space-y-3">
+                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Friends</li>
+                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Parties</li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className="text-gray-400 text-sm uppercase mb-2">General</h2>
+              <ul className="space-y-3">
+                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Settings</li>
+                <li className="text-gray-600 hover:text-red-500 cursor-pointer">Log out</li>
+              </ul>
+            </div>
+          </nav>
         </div>
+
+        <div className="mt-10 bg-gray-50 p-4 rounded-xl text-center">
+          <h3 className="font-semibold text-sm">🍿 Popcorn Addict</h3>
+          <p className="text-xs text-gray-500 mb-2">4/6h viewing time</p>
+          <button className="bg-red-500 text-white rounded-lg px-3 py-1 text-xs hover:bg-red-600">
+            View challenges
+          </button>
+        </div>
+      </aside>
+
+      {/* Contenido principal */}
+      <main className="flex-1 p-8 overflow-auto">
+        {/* Header */}
+        <header className="flex justify-between items-center mb-8">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-1/3 bg-white rounded-lg px-4 py-2 shadow-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+          />
+          <div className="flex items-center gap-4">
+            <button className="relative text-xl">
+              🔔
+              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-full">
+                3
+              </span>
+            </button>
+            <button className="text-xl">💬</button>
+            <div className="flex items-center gap-2">
+              <Image
+                src="/images/avatar.jpg"
+                alt="user"
+                width={40}
+                height={40}
+                className="rounded-full border"
+              />
+              <div>
+                <p className="font-semibold">Ramona F.</p>
+                <p className="text-xs text-gray-500">Level 12</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero section */}
+        <section className="relative rounded-2xl overflow-hidden shadow-lg mb-10">
+          <Image
+            src="/images/witcher.jpg"
+            alt="The Witcher"
+            width={1000}
+            height={400}
+            className="w-full h-72 object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
+            <h2 className="text-3xl text-white font-bold">The Witcher</h2>
+            <p className="text-gray-300 text-sm">98% Match • 2 seasons</p>
+            <div className="flex items-center gap-4 mt-4">
+              <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-2 rounded-lg">
+                Watch
+              </button>
+              <button className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg">
+                +
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Parties */}
+        <section className="mb-8">
+          <h3 className="text-lg font-semibold mb-4">Parties</h3>
+          <div className="flex gap-4 overflow-x-auto pb-2">
+            {[
+              { title: "Cadaver", subtitle: "Horror marathon", img: "/images/cadaver.jpg" },
+              { title: "Bladerunner 2049", subtitle: "Sci-fi binge", img: "/images/bladerunner.jpg" },
+              { title: "Monsters Inc.", subtitle: "Don’t make me grow up", img: "/images/monsters.jpg" },
+              { title: "Friends", subtitle: "We were on a break!", img: "/images/friends.jpg" },
+            ].map((party, i) => (
+              <div
+                key={i}
+                className="min-w-[180px] bg-white p-4 rounded-xl shadow hover:shadow-md cursor-pointer transition"
+              >
+                <Image
+                  src={party.img}
+                  alt={party.title}
+                  width={200}
+                  height={100}
+                  className="h-24 w-full object-cover rounded-lg mb-3"
+                />
+                <h4 className="font-semibold">{party.title}</h4>
+                <p className="text-xs text-gray-500">{party.subtitle}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Continue Watching */}
+        <section>
+          <h3 className="text-lg font-semibold mb-4">Continue watching</h3>
+          <div className="grid grid-cols-4 gap-6">
+            {[
+              { title: "Haunting of Hill House", img: "/images/haunting.jpg" },
+              { title: "Ratched", img: "/images/ratched.jpg" },
+              { title: "El Camino", img: "/images/elcamino.jpg" },
+              { title: "Stranger Things", img: "/images/stranger.jpg" },
+            ].map((show, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition"
+              >
+                <Image
+                  src={show.img}
+                  alt={show.title}
+                  width={300}
+                  height={160}
+                  className="h-40 w-full object-cover"
+                />
+                <div className="p-4">
+                  <h4 className="font-semibold">{show.title}</h4>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Sidebar derecha - Amigos */}
+      <aside className="w-64 bg-white shadow-lg p-6 hidden lg:flex flex-col">
+        <h2 className="text-gray-400 text-sm uppercase mb-4">Amigos</h2>
+
+        <div className="flex flex-col gap-4 overflow-y-auto">
+          {[
+            { name: "Juan Pérez", img: "/images/amigos/amigo1.jpg" },
+            { name: "María López", img: "/images/amigos/amigo2.jpg" },
+            { name: "Carlos Ruiz", img: "/images/amigos/amigo3.jpg" },
+            { name: "Lucía Gómez", img: "/images/amigos/amigo4.jpg" },
+            { name: "Andrés Díaz", img: "/images/amigos/amigo5.jpg" },
+          ].map((friend, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-3 hover:bg-gray-50 p-2 rounded-lg cursor-pointer"
+            >
+              <Image
+                src={friend.img}
+                alt={friend.name}
+                width={40}
+                height={40}
+                className="rounded-full border border-gray-200"
+              />
+              <div className="flex flex-col">
+                <span className="font-medium text-sm">{friend.name}</span>
+                <span className="text-xs text-green-500 flex items-center gap-1">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span> En línea
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </aside>
     </div>
   );
 }
